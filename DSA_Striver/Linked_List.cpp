@@ -158,7 +158,7 @@ void printList(node *head)
 int main()
 {
     // vector<int> arr = {4, 6, 3, 8, 12, 15};
-    vector<int> arr = {1,2,3};
+    vector<int> arr = {1, 2, 3};
     node *head = convertArr2LL(arr);
 
     cout << "Original List: ";
