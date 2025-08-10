@@ -1623,119 +1623,117 @@ int main()
 
    ================================================================== */
 
+/* ====================================================================
+COMPREHENSIVE STL CONTAINER SELECTION MATRIX WITH DETAILED EXPLANATIONS
+====================================================================
 
-   /* ====================================================================
-   COMPREHENSIVE STL CONTAINER SELECTION MATRIX WITH DETAILED EXPLANATIONS
-   ====================================================================
+KEY:
+- Access: Time complexity for accessing elements
+- Search: Time complexity for finding elements
+- Insert: Time complexity for inserting elements
+- Delete: Time complexity for deleting elements
+- Ordering: Whether elements are stored in a particular order
+- Duplicates: Whether duplicate elements are allowed
+- Memory: Memory layout characteristics
 
-   KEY:
-   - Access: Time complexity for accessing elements
-   - Search: Time complexity for finding elements
-   - Insert: Time complexity for inserting elements
-   - Delete: Time complexity for deleting elements
-   - Ordering: Whether elements are stored in a particular order
-   - Duplicates: Whether duplicate elements are allowed
-   - Memory: Memory layout characteristics
+CONTAINER SELECTION MATRIX:
+┌──────────────────────┬──────────┬──────────┬──────────┬──────────┬───────────┬───────────┬─────────────────────────────┐
+│ Container            │ Access   │ Search   │ Insert   │ Delete   │ Ordering  │ Duplicates│ Memory/Notes               │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ vector               │ O(1)     │ O(n)     │ O(n)E    │ O(n)E    │ Insertion │ Yes       │ Contiguous memory          │
+│                      │          │          │ O(1)E    │ O(1)E    │           │           │ Fast access, slow mid I/D  │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ deque                │ O(1)     │ O(n)     │ O(1)E    │ O(1)E    │ Insertion │ Yes       │ Chunks of contiguous       │
+│                      │          │          │ O(n)M    │ O(n)M    │           │           │ Good for both-end ops      │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ list                 │ O(n)     │ O(n)     │ O(1)     │ O(1)     │ Insertion │ Yes       │ Non-contiguous nodes       │
+│ (forward_list)       │          │          │          │          │           │           │ No random access           │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ array                │ O(1)     │ O(n)     │ N/A      │ N/A      │ Insertion │ Yes       │ Fixed-size contiguous      │
+│                      │          │          │          │          │           │           │ No growth/shrink           │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ set                  │ N/A      │ O(log n) │ O(log n) │ O(log n) │ Sorted    │ No        │ Red-Black Tree             │
+│ (multiset)           │          │          │          │          │           │ (Yes)     │ Slow iteration             │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ unordered_set        │ N/A      │ O(1)     │ O(1)     │ O(1)     │ Hashed    │ No        │ Hash table                 │
+│ (unordered_multiset) │          │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │           │ (Yes)     │ Fast but unordered         │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ map                  │ O(log n) │ O(log n) │ O(log n) │ O(log n) │ Key-sorted│ No        │ Red-Black Tree             │
+│ (multimap)           │          │          │          │          │           │ (Yes)     │ Key-value pairs            │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ unordered_map        │ O(1)     │ O(1)     │ O(1)     │ O(1)     │ Hashed    │ No        │ Hash table                 │
+│ (unordered_multimap) │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │           │ (Yes)     │ Fast but unordered         │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ stack                │ O(1)T    │ N/A      │ O(1)     │ O(1)     │ LIFO      │ Yes       │ Adaptor (uses deque)       │
+│                      │          │          │          │          │           │           │ Only top access            │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ queue                │ O(1)F    │ N/A      │ O(1)     │ O(1)     │ FIFO      │ Yes       │ Adaptor (uses deque)       │
+│                      │          │          │          │          │           │           │ Front/back access only     │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ priority_queue       │ O(1)T    │ N/A      │ O(log n) │ O(log n) │ Sorted    │ Yes       │ Adaptor (uses vector)      │
+│                      │          │          │          │          │ Priority  │           │ Heap structure             │
+├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
+│ string               │ O(1)     │ O(n)     │ O(n)E    │ O(n)E    │ Insertion │ Yes       │ Similar to vector          │
+│                      │          │          │ O(1)E    │ O(1)E    │           │           │ Specialized for chars      │
+└──────────────────────┴──────────┴──────────┴──────────┴──────────┴───────────┴───────────┴─────────────────────────────┘
 
-   CONTAINER SELECTION MATRIX:
-   ┌──────────────────────┬──────────┬──────────┬──────────┬──────────┬───────────┬───────────┬─────────────────────────────┐
-   │ Container            │ Access   │ Search   │ Insert   │ Delete   │ Ordering  │ Duplicates│ Memory/Notes               │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ vector               │ O(1)     │ O(n)     │ O(n)E    │ O(n)E    │ Insertion │ Yes       │ Contiguous memory          │
-   │                      │          │          │ O(1)E    │ O(1)E    │           │           │ Fast access, slow mid I/D  │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ deque                │ O(1)     │ O(n)     │ O(1)E    │ O(1)E    │ Insertion │ Yes       │ Chunks of contiguous       │
-   │                      │          │          │ O(n)M    │ O(n)M    │           │           │ Good for both-end ops      │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ list                 │ O(n)     │ O(n)     │ O(1)     │ O(1)     │ Insertion │ Yes       │ Non-contiguous nodes       │
-   │ (forward_list)       │          │          │          │          │           │           │ No random access           │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ array                │ O(1)     │ O(n)     │ N/A      │ N/A      │ Insertion │ Yes       │ Fixed-size contiguous      │
-   │                      │          │          │          │          │           │           │ No growth/shrink           │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ set                  │ N/A      │ O(log n) │ O(log n) │ O(log n) │ Sorted    │ No        │ Red-Black Tree             │
-   │ (multiset)           │          │          │          │          │           │ (Yes)     │ Slow iteration             │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ unordered_set        │ N/A      │ O(1)     │ O(1)     │ O(1)     │ Hashed    │ No        │ Hash table                 │
-   │ (unordered_multiset) │          │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │           │ (Yes)     │ Fast but unordered         │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ map                  │ O(log n) │ O(log n) │ O(log n) │ O(log n) │ Key-sorted│ No        │ Red-Black Tree             │
-   │ (multimap)           │          │          │          │          │           │ (Yes)     │ Key-value pairs            │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ unordered_map        │ O(1)     │ O(1)     │ O(1)     │ O(1)     │ Hashed    │ No        │ Hash table                 │
-   │ (unordered_multimap) │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │ (O(n)W)  │           │ (Yes)     │ Fast but unordered         │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ stack                │ O(1)T    │ N/A      │ O(1)     │ O(1)     │ LIFO      │ Yes       │ Adaptor (uses deque)       │
-   │                      │          │          │          │          │           │           │ Only top access            │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ queue                │ O(1)F    │ N/A      │ O(1)     │ O(1)     │ FIFO      │ Yes       │ Adaptor (uses deque)       │
-   │                      │          │          │          │          │           │           │ Front/back access only     │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ priority_queue       │ O(1)T    │ N/A      │ O(log n) │ O(log n) │ Sorted    │ Yes       │ Adaptor (uses vector)      │
-   │                      │          │          │          │          │ Priority  │           │ Heap structure             │
-   ├──────────────────────┼──────────┼──────────┼──────────┼──────────┼───────────┼───────────┼─────────────────────────────┤
-   │ string               │ O(1)     │ O(n)     │ O(n)E    │ O(n)E    │ Insertion │ Yes       │ Similar to vector          │
-   │                      │          │          │ O(1)E    │ O(1)E    │           │           │ Specialized for chars      │
-   └──────────────────────┴──────────┴──────────┴──────────┴──────────┴───────────┴───────────┴─────────────────────────────┘
+LEGEND:
+E - End operations (push_back/pop_back)
+M - Middle operations
+F - Front operations
+T - Top operations
+W - Worst case (hash collision)
+N/A - Not applicable or not available directly
 
-   LEGEND:
-   E - End operations (push_back/pop_back)
-   M - Middle operations
-   F - Front operations
-   T - Top operations
-   W - Worst case (hash collision)
-   N/A - Not applicable or not available directly
+CONTAINER SELECTION GUIDE:
+1. Need index-based access? → vector, array, deque, string
+2. Need frequent insertion/deletion at both ends? → deque
+3. Need frequent middle insertion/deletion? → list
+4. Need sorted elements? → set, map, multiset, multimap
+5. Need fastest lookup? → unordered_set, unordered_map
+6. Need LIFO/FIFO behavior? → stack, queue
+7. Need priority-based access? → priority_queue
+8. Need string operations? → string
 
-   CONTAINER SELECTION GUIDE:
-   1. Need index-based access? → vector, array, deque, string
-   2. Need frequent insertion/deletion at both ends? → deque
-   3. Need frequent middle insertion/deletion? → list
-   4. Need sorted elements? → set, map, multiset, multimap
-   5. Need fastest lookup? → unordered_set, unordered_map
-   6. Need LIFO/FIFO behavior? → stack, queue
-   7. Need priority-based access? → priority_queue
-   8. Need string operations? → string
+PERFORMANCE CHARACTERISTICS:
+- Contiguous memory (vector, array, string):
+  ✓ Fast iteration
+  ✓ Good cache locality
+  ✗ Expensive insertions/deletions in middle
 
-   PERFORMANCE CHARACTERISTICS:
-   - Contiguous memory (vector, array, string):
-     ✓ Fast iteration
-     ✓ Good cache locality
-     ✗ Expensive insertions/deletions in middle
+- Node-based (list, set, map):
+  ✓ Fast insertions/deletions anywhere
+  ✗ Poor cache locality
+  ✗ No random access
 
-   - Node-based (list, set, map):
-     ✓ Fast insertions/deletions anywhere
-     ✗ Poor cache locality
-     ✗ No random access
+- Hash-based (unordered_*):
+  ✓ Fastest average access
+  ✗ Worst-case O(n) performance
+  ✗ No ordering
 
-   - Hash-based (unordered_*):
-     ✓ Fastest average access
-     ✗ Worst-case O(n) performance
-     ✗ No ordering
+- Adaptors (stack, queue, priority_queue):
+  ✓ Clean interface for specific use cases
+  ✗ Limited functionality
 
-   - Adaptors (stack, queue, priority_queue):
-     ✓ Clean interface for specific use cases
-     ✗ Limited functionality
+MEMORY OVERHEAD COMPARISON (per element):
+- Lowest: vector, array, string
+- Medium: deque, unordered_*
+- High: list, set, map
+- Adaptors: Depends on underlying container
 
-   MEMORY OVERHEAD COMPARISON (per element):
-   - Lowest: vector, array, string
-   - Medium: deque, unordered_*
-   - High: list, set, map
-   - Adaptors: Depends on underlying container
-
-   ITERATOR INVALIDATION RULES:
-   - vector: All iterators invalidated on reallocation
-   - deque: Invalidated on middle insert/delete
-   - list: Never invalidated (unless element deleted)
-   - set/map: Never invalidated (unless element deleted)
-   - unordered_*: Invalidated on rehash
-   - string: Same as vector
+ITERATOR INVALIDATION RULES:
+- vector: All iterators invalidated on reallocation
+- deque: Invalidated on middle insert/delete
+- list: Never invalidated (unless element deleted)
+- set/map: Never invalidated (unless element deleted)
+- unordered_*: Invalidated on rehash
+- string: Same as vector
 */
-
 
 /* ====================================================================
    ENHANCED STL CONTAINER COMPLEXITY ANALYSIS - ADDITIONS TO EXISTING CODE
-   
-   Add these sections to enhance the existing STL guide with detailed 
+
+   Add these sections to enhance the existing STL guide with detailed
    time complexity analysis and additional implementation details
    ====================================================================
 
@@ -1854,7 +1852,7 @@ ADVANCED PERFORMANCE CHARACTERISTICS:
 
 1. CACHE PERFORMANCE ANALYSIS:
    - vector/array: Excellent - sequential memory access
-   - deque: Good - chunks provide reasonable locality  
+   - deque: Good - chunks provide reasonable locality
    - list: Poor - nodes scattered in memory
    - set/map: Poor - tree traversal has poor locality
    - unordered_*: Variable - depends on hash distribution
@@ -1938,136 +1936,76 @@ SPACE COMPLEXITY ANALYSIS:
 // ====================================================================
 // ENHANCED PERFORMANCE OPTIMIZATION GUIDELINES
 // ====================================================================
-void explainAdvancedPerformanceOptimizations()
-{
-    cout << "\n========== ADVANCED PERFORMANCE OPTIMIZATION GUIDE ==========\n";
-    
-    cout << "1. CONTAINER SELECTION DECISION TREE:\n";
-    cout << "   ┌─ Need random access?\n";
-    cout << "   │  ├─ Yes ──┐\n";
-    cout << "   │  │        ├─ Fixed size? ──── array\n";
-    cout << "   │  │        ├─ Insert at ends? ── deque  \n";
-    cout << "   │  │        └─ Insert anywhere? ── vector\n";
-    cout << "   │  └─ No ───── list (if frequent middle insert/delete)\n";
-    cout << "   ├─ Need sorted order?\n";
-    cout << "   │  ├─ Yes ──┐\n";
-    cout << "   │  │        ├─ Unique keys only? ── set/map\n";
-    cout << "   │  │        └─ Allow duplicates? ── multiset/multimap\n";
-    cout << "   │  └─ No ───── unordered_set/map (fastest lookup)\n";
-    cout << "   └─ Need special access pattern?\n";
-    cout << "      ├─ LIFO (Last In First Out) ── stack\n";
-    cout << "      ├─ FIFO (First In First Out) ── queue\n";
-    cout << "      └─ Priority-based ──────────── priority_queue\n\n";
 
-    cout << "2. MEMORY OPTIMIZATION STRATEGIES:\n";
-    cout << "   ┌─ Vector Optimizations:\n";
-    cout << "   │  ├─ reserve() when final size is known\n";
-    cout << "   │  ├─ shrink_to_fit() to reduce capacity\n";
-    cout << "   │  ├─ emplace_back() instead of push_back()\n";
-    cout << "   │  └─ Move semantics for expensive objects\n";
-    cout << "   ├─ Unordered Container Optimizations:\n";
-    cout << "   │  ├─ Set appropriate load factor (0.75 default)\n";
-    cout << "   │  ├─ Reserve buckets: unordered_map.reserve(expected_size)\n";
-    cout << "   │  ├─ Use good hash function for custom types\n";
-    cout << "   │  └─ Consider robin hood hashing for better performance\n";
-    cout << "   └─ General Memory Tips:\n";
-    cout << "      ├─ Use const auto& in range-based loops\n";
-    cout << "      ├─ Avoid unnecessary copies with move semantics\n";
-    cout << "      ├─ Consider object pooling for frequent allocations\n";
-    cout << "      └─ Profile memory usage with tools like valgrind\n\n";
+/*
+========== ADVANCED PERFORMANCE OPTIMIZATION GUIDE ==========
 
-    cout << "3. CACHE OPTIMIZATION TECHNIQUES:\n";
-    cout << "   ┌─ Data Structure Layout:\n";
-    cout << "   │  ├─ Prefer vector over list for sequential access\n";
-    cout << "   │  ├─ Use struct-of-arrays instead of array-of-structs\n";
-    cout << "   │  ├─ Pack data members to minimize padding\n";
-    cout << "   │  └─ Consider memory-mapped files for large datasets\n";
-    cout << "   ├─ Access Patterns:\n";
-    cout << "   │  ├─ Process data in sequential order when possible\n";
-    cout << "   │  ├─ Use blocking/tiling for matrix operations\n";
-    cout << "   │  ├─ Prefetch data when access pattern is predictable\n";
-    cout << "   │  └─ Minimize pointer chasing in hot loops\n";
-    cout << "   └─ Algorithm Selection:\n";
-    cout << "      ├─ Choose cache-friendly algorithms\n";
-    cout << "      ├─ Use iterative instead of recursive when possible\n";
-    cout << "      ├─ Consider parallel algorithms for large datasets\n";
-    cout << "      └─ Profile with cache analysis tools\n\n";
+1. CONTAINER SELECTION DECISION TREE:
+   ┌─ Need random access?
+   │  ├─ Yes ──┐
+   │  │        ├─ Fixed size? ──── array
+   │  │        ├─ Insert at ends? ── deque
+   │  │        └─ Insert anywhere? ── vector
+   │  └─ No ───── list (if frequent middle insert/delete)
+   ├─ Need sorted order?
+   │  ├─ Yes ──┐
+   │  │        ├─ Unique keys only? ── set/map
+   │  │        └─ Allow duplicates? ── multiset/multimap
+   │  └─ No ───── unordered_set/map (fastest lookup)
+   └─ Need special access pattern?
+      ├─ LIFO (Last In First Out) ── stack
+      ├─ FIFO (First In First Out) ── queue
+      └─ Priority-based ──────────── priority_queue
 
-    cout << "4. COMPLEXITY ANALYSIS IN PRACTICE:\n";
-    cout << "   ┌─ Amortized Analysis Understanding:\n";
-    cout << "   │  ├─ vector.push_back(): Individual O(n), amortized O(1)\n";
-    cout << "   │  ├─ Reason: Doubling strategy spreads cost over operations\n";
-    cout << "   │  ├─ Growth factors: 1.5x (MSVC) vs 2x (GCC) trade-offs\n";
-    cout << "   │  └─ reserve() eliminates amortized cost uncertainty\n";
-    cout << "   ├─ Hash Table Performance:\n";
-    cout << "   │  ├─ Load factor impact: 0.5 (fast) vs 0.9 (memory efficient)\n";
-    cout << "   │  ├─ Hash function quality affects worst-case behavior\n";
-    cout << "   │  ├─ Collision resolution: chaining vs open addressing\n";
-    cout << "   │  └─ Rehashing cost: O(n) but infrequent with good sizing\n";
-    cout << "   └─ Tree-Based Container Insights:\n";
-    cout << "      ├─ Red-black tree guarantees O(log n) worst case\n";
-    cout << "      ├─ Tree height: log₂(n) to 2×log₂(n) range\n";
-    cout << "      ├─ Node allocation overhead affects small datasets\n";
-    cout << "      └─ Consider B-trees for disk-based storage\n\n";
+2. MEMORY OPTIMIZATION STRATEGIES:
+   ┌─ Vector Optimizations:
+   │  ├─ reserve() when final size is known
+   │  ├─ shrink_to_fit() to reduce capacity
+   │  ├─ emplace_back() instead of push_back()
+   │  └─ Move semantics for expensive objects
+   ├─ Unordered Container Optimizations:
+   │  ├─ Set appropriate load factor (0.75 default)
+   │  ├─ Reserve buckets: unordered_map.reserve(expected_size)
+   │  ├─ Use good hash function for custom types
+   │  └─ Consider robin hood hashing for better performance
+   └─ General Memory Tips:
+      ├─ Use const auto& in range-based loops
+      ├─ Avoid unnecessary copies with move semantics
+      ├─ Consider object pooling for frequent allocations
+      └─ Profile memory usage with tools like valgrind
 
-    cout << "5. BENCHMARK-DRIVEN OPTIMIZATION:\n";
-    cout << "   ┌─ Micro-benchmarking:\n";
-    cout << "   │  ├─ Use std::chrono for timing\n";
-    cout << "   │  ├─ Warm up caches before measurement\n";
-    cout << "   │  ├─ Run multiple iterations for statistical significance\n";
-    cout << "   │  └─ Consider compiler optimization effects (-O2, -O3)\n";
-    cout << "   ├─ Profiling Tools:\n";
-    cout << "   │  ├─ perf: CPU performance counters\n";
-    cout << "   │  ├─ cachegrind: Cache miss analysis\n";
-    cout << "   │  ├─ massif: Heap memory usage\n";
-    cout << "   │  └─ Intel VTune: Comprehensive performance analysis\n";
-    cout << "   └─ A/B Testing:\n";
-    cout << "      ├─ Compare different container choices\n";
-    cout << "      ├─ Test various algorithm implementations\n";
-    cout << "      ├─ Measure under realistic workloads\n";
-    cout << "      └─ Consider different data distributions\n";
-}
+3. CACHE OPTIMIZATION TECHNIQUES:
+   ┌─ Data Structure Layout:
+   │  ├─ Prefer vector over list for sequential access
+   │  ├─ Use struct-of-arrays instead of array-of-structs
+   │  ├─ Pack data members to minimize padding
+   │  └─ Consider memory-mapped files for large datasets
+   ├─ Access Patterns:
+   │  ├─ Process data in sequential order when possible
+   │  ├─ Use blocking/tiling for matrix operations
+   │  ├─ Prefetch data when access pattern is predictable
+   │  └─ Minimize pointer chasing in hot loops
+   └─ Algorithm Selection:
+      ├─ Choose cache-friendly algorithms
+      ├─ Use iterative instead of recursive when possible
+      ├─ Consider parallel algorithms for large datasets
+      └─ Profile with cache analysis tools
 
-// ====================================================================
-// MODERN C++ FEATURES IMPACT ON STL PERFORMANCE  
-// ====================================================================
-void explainModernCppPerformanceFeatures()
-{
-    cout << "\n========== MODERN C++ FEATURES & STL PERFORMANCE ==========\n";
-    
-    cout << "1. MOVE SEMANTICS OPTIMIZATION (C++11):\n";
-    cout << "   ┌─ Container Operations:\n";
-    cout << "   │  ├─ push_back() vs emplace_back() for objects:\n";
-    cout << "   │  │  • push_back(): Copy constructor + possible move\n";
-    cout << "   │  │  • emplace_back(): Direct construction in place\n";
-    cout << "   │  │  • Performance gain: Eliminates temporary objects\n";
-    cout << "   │  ├─ insert() vs emplace() family:\n";
-    cout << "   │  │  • emplace_hint(), emplace_front(), etc.\n";
-    cout << "   │  │  • Particularly beneficial for complex objects\n";
-    cout << "   │  └─ Return value optimization in container operations\n";
-    cout << "   ├─ Examples:\n";
-    cout << "   │  vector<string> v;\n";
-    cout << "   │  v.push_back(string(\"hello\"));    // Copy + move\n";
-    cout << "   │  v.emplace_back(\"hello\");         // Direct construction\n";
-    cout << "   │  \n";
-    cout << "   │  map<int, ComplexType> m;\n";
-    cout << "   │  m[1] = ComplexType(args);         // Default construct + assign\n";
-    cout << "   │  m.emplace(1, args);               // Direct construction\n";
-    cout << "   └─ Performance Impact:\n";
-    cout << "      ├─ Reduces constructor/destructor calls\n";
-    cout << "      ├─ Eliminates temporary object allocation\n";
-    cout << "      ├─ Particularly important for expensive-to-copy types\n";
-    cout << "      └─ Can provide 2-10x performance improvement\n\n";
+4. COMPLEXITY ANALYSIS IN PRACTICE:
+   ┌─ Amortized Analysis Understanding:
+   │  ├─ vector.push_back(): Individual O(n), amortized O(1)
+   │  ├─ Reason: Doubling strategy spreads cost over operations
+   │  ├─ Growth factors: 1.5x (MSVC) vs 2x (GCC) trade-offs
+   │  └─ reserve() eliminates amortized cost uncertainty
+   ├─ Hash Table Performance:
+   │  ├─ Load factor impact: 0.5 (fast) vs 0.9 (memory efficient)
+   │  ├─ Hash function quality affects worst-case behavior
+   │  ├─ Collision resolution: chaining vs open addressing
+   │  └─ Rehashing cost: O(n) but infrequent with good sizing
+   └─ Tree-Based Container Insights:
+      ├─ Red-black tree guarantees O(log n) worst case
+      ├─ Tree height: log₂(n) to 2×log₂(n) range
+      ├─ Node allocation overhead affects small datasets
+      └─ Consider B-trees for disk-based storage
 
-    cout << "2. RANGE-BASED FOR LOOPS OPTIMIZATION (C++11):\n";
-    cout << "   ┌─ Syntax Variations & Performance:\n";
-    cout << "   │  for (auto element : container)        // Copy each element\n";
-    cout << "   │  for (const auto& element : container) // Reference (read-only)\n";
-    cout << "   │  for (auto& element : container)       // Reference (modifiable)\n";
-    cout << "   │  for (auto&& element : container)      // Universal reference\n";
-    cout << "   ├─ Compiler Optimizations:\n";
-    cout << "   │  ├─ Often optimized to same assembly as iterator loops\n";
-    cout << "   │  ├─ begin()/end() calls may be optimized away\n";
-    cout << "   │  ├─ Better optimization with const containers\n";
-    cout << "   │  └─ Range-based loops can enable auto-vectorization\n";
-    cout << "   └
+*/
