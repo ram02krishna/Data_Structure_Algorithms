@@ -742,49 +742,35 @@ int main()
 }
 
 /*
-NOTE :
-1. Vector as Value (Most Common)
-You can store a vector as a value in an unordered_map without any issues.unordered_map<string, vector<int>> mp;
+1. What is map?
+map in C++ is an ordered associative container that stores key–value pairs (key must be unique).
+Keys are sorted automatically (by default in ascending order using < operator).
+Internally implemented as a balanced binary search tree (Red-Black Tree).
+Syntax:
+#include <map>
+map<int, string> m;
 
-#include<bits/stdc++.h>
-using namespace std;
-int main() {
-    unordered_map<string, vector<int>> mp;
-    mp["marks"].push_back(90);
-    mp["marks"].push_back(85);
-    for (int x : mp["marks"]) {
-        cout << x << " ";
-    }
-    return 0;
-}
+Key Features:
+Stores elements in order of keys.
+Searching, insertion, and deletion take O(log n) time because of tree operations.
+Keys must be comparable (operator < should be defined).
 
-***************************************************************
-2. Vector as Key (Not Directly)
-You cannot directly use vector as a key in unordered_map, because it doesn't have a hash function defined by default.
-unordered_map<vector<int>, int> mp; // ❌ This gives compile error
 
-To make this work, you need to define a custom hash function.
-Custom Hash Function for Vector,here is the code below to use vector as key in unordered_map:
-#include<bits/stdc++.h>
-using namespace std;
+2. What is unordered_map?
+unordered_map is an unordered associative container that stores key–value pairs but does NOT keep them sorted.
+Internally implemented as a hash table.
+Keys are placed into buckets based on their hash value.
+Syntax:
+#include <unordered_map>
+unordered_map<int, string> um;
 
-struct VectorHash {
-    size_t operator()(const vector<int>& v) const {
-        size_t hash = 0;
-        for (int i : v) {
-            hash ^= hash * 31 + hash<int>()(i);  // Combine hashes
-        }
-        return hash;
-    }
-};
+Key Features:
+No ordering of keys.
+Searching, insertion, and deletion take average O(1) time, but worst case O(n) (if too many collisions).
+Keys must be hashable (a hash function must exist).
 
-int main() {
-    unordered_map<vector<int>, string, VectorHash> mp;
-    mp[{1, 2, 3}] = "hello";
-    mp[{4, 5}] = "world";
-    cout << mp[{1, 2, 3}] << endl; // Output: hello
-    cout << mp[{4, 5}] << endl;    // Output: world
-    return 0;
-}
 
+MAP VS UNORDERED_MAP IN NOTION 
+LINK:
+https://www.notion.so/map-vs-unordered_map-1-24f251d6f0d480ada3e6c0ca2005b905?source=copy_link
 */
