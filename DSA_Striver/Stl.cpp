@@ -1586,7 +1586,7 @@ int main()
    │ unordered_set   │ O(1)avg  │ O(1)avg   │ O(1)avg  │ Fast lookup   │
    │ stack/queue     │ O(1)     │ O(1)      │ O(1)     │ LIFO/FIFO     │
    │ priority_queue  │ O(1)     │ O(log n)  │ O(log n) │ Priority ops  │
-   └─────────────────┴──────────┴───────────┴──────────┴───────────────┘
+   └─────────────────┴──────────┴───────────┴──────────┴───────────────┘KO
 
    ITERATOR CATEGORIES:
    1. Input Iterator: Read-only, single-pass (istream_iterator)

@@ -774,3 +774,83 @@ MAP VS UNORDERED_MAP IN NOTION
 LINK:
 https://www.notion.so/map-vs-unordered_map-1-24f251d6f0d480ada3e6c0ca2005b905?source=copy_link
 */
+
+
+/*
+1.set
+Definition: Stores unique keys in sorted order.
+Underlying structure: Usually a balanced binary search tree (Red-Black Tree).
+Ordering: Sorted ascending by default (std::less<T> comparator can be customized).
+Duplicates: ❌ Not allowed.
+Complexity:
+Insert / erase / find: O(log n)
+Use case: When you need a collection of unique elements in sorted order.
+
+std::set<int> s = {5,1,3};
+stores: {1,3,5}
+
+2.unordered_set
+Definition: Stores unique keys with no specific order.
+Underlying structure: Hash table.
+Ordering: ❌ No order (depends on hash function & buckets).
+Duplicates: ❌ Not allowed.
+Complexity:
+Average Insert / erase / find: O(1)
+Worst case (bad hashing): O(n)
+Use case: Fast lookup/insertion when order doesn’t matter.
+
+std::unordered_set<int> us = {5,1,3};
+possible order: {3,5,1} (implementation-defined)
+
+3.multiset
+Definition: Like set but allows duplicate keys.
+Underlying structure: Balanced BST.
+Ordering: Sorted ascending by default.
+Duplicates: ✅ Allowed.
+Complexity: Insert / erase / find: O(log n)
+Use case: Need a sorted collection that allows multiple identical values.
+
+std::multiset<int> ms = {2,2,1};
+stores: {1,2,2}
+
+4.map
+Definition: Stores key–value pairs with unique keys, keys are sorted.
+Underlying structure: Balanced BST.
+Ordering: Sorted by key (default ascending).
+Duplicates: ❌ Keys unique (values can repeat).
+Complexity: Insert / erase / find: O(log n)
+Use case: Dictionary-like data with sorted keys.
+
+std::map<int,string> m;
+m[2] = "b";
+m[1] = "a";
+keys stored as {1:"a", 2:"b"}
+
+5.unordered_map
+Definition: Key–value pairs with unique keys, no order.
+Underlying structure: Hash table.
+Ordering: ❌ None.
+Duplicates: ❌ Keys unique.
+Complexity: Average O(1) for insert/find/erase.
+Use case: Fast dictionary when ordering is irrelevant.
+
+std::unordered_map<int,string> um;
+um[2] = "b";
+um[1] = "a";
+possible internal order is arbitrary.
+
+6.multimap
+Definition: Key–value pairs with duplicate keys allowed, keys sorted.
+Underlying structure: Balanced BST.
+Ordering: Sorted by key.
+Duplicates: ✅ Keys can repeat.
+Complexity: Insert / erase / find: O(log n)
+Use case: One key associated with multiple values (like a dictionary of lists).
+
+std::multimap<int,string> mm;
+mm.insert({1,"a"});
+mm.insert({1,"b"});
+stores keys: {1:"a", 1:"b"} in sorted order.
+
+*/
+
