@@ -854,3 +854,24 @@ stores keys: {1:"a", 1:"b"} in sorted order.
 
 */
 
+/*
+STL Way of sorting an array of pairs based on the second element and if the second element is same then sort it based on the first element in descending order.
+
+sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b) {
+    return a[0] < b[0];
+});
+
+sort() is a built-in function in C++ that sorts elements in a range. It takes three parameters: the beginning of the range, the end of the range, and an optional comparator function.
+
+In the provided code snippet, we are sorting a vector of vectors (intervals) based on the first element of each inner vector. The lambda function [](vector<int> &a, vector<int> &b) { return a[0] < b[0]; } serves as the comparator, which compares the first elements of the inner vectors to determine their order in the sorted output.
+
+if you want to sort based on the second element and if the second element is the same then sort based on the first element in descending order, you can modify the comparator as follows:  
+sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b) {
+    if (a[1] == b[1]) {
+        return a[0] > b[0]; // Sort by first element in descending order if second elements are equal
+    }
+    return a[1] < b[1]; // Sort by second element in ascending order
+});
+
+
+*/

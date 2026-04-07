@@ -29,7 +29,7 @@ int main()
         int v = edgeList[i][1];
 
         adjMatrix[u][v] = 1;
-        adjMatrix[v][u] = 1; // undirected graph
+        adjMatrix[v][u] = 1; // undirected graph,for directed graph, remove this line
     }
 
     vector<int> visited(n, 0);
