@@ -875,3 +875,15 @@ sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b) {
 
 
 */
+
+/*
+
+Syntax for initializing  adjancency list using vector:
+vector<vector<int>>adjList(n); // where n is the number of vertices in the graph
+This creates a vector of vectors (2D vector) where each inner vector represents the list of adjacent vertices for a particular vertex in the graph. The size of the outer vector is n, which corresponds to the number of vertices, and each inner vector can grow dynamically as you add edges to the graph.
+
+synatx for initializing adjancency matrix using vector:
+vector<vector<int>>adjMatrix(n, vector<int>(m, 0)); // where n is the number of vertices in the graph and m is the number of edges or the maximum number of edges possible in the graph (which is n*n for a directed graph and n*(n-1)/2 for an undirected graph).
+This creates a 2D vector (matrix) of size n x m, initialized with zeros. Each element adjMatrix[i][j] represents the presence (or weight) of an edge between vertex i and vertex j. Initially, all values are set to 0, indicating no edges between any vertices.
+
+*/
