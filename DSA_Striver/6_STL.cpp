@@ -30,6 +30,20 @@ void explainVector()
     v.push_back(1);    // now container becomes -> {1}
     v.emplace_back(2); // emplace_back dynamically increases the size and insert the element.here container becomes -> {1,2} ,emplace_back is faster than push_back
 
+    // Syntax for 2d vector -> vector<vector<int>> matrix(rows,vector<int>(cols, initial_value)); // this is how we can define a 2D vector with rows and cols and initial value for each element of the 2D vector
+    vector<vector<int>> vector2D(3, vector<int>(4, 0)); // This creates a 2D vector with 3 rows and 4 columns, initialized to 0
+    vector2D[0][1] = 5;                                 // This sets the element in the first row and second column to 5
+    vector2D[2][3] = 10;                                // This sets the element in the third row and fourth column to 10
+    // To access elements in the 2D vector, use vector2D[row][column]
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            cout << vector2D[i][j] << " "; // This will print the elements of the 2D vector
+        }
+        cout << endl;
+    }
+
     vector<pair<int, int>> vec;
     vec.push_back({1, 3});
     vec.emplace_back(5, 7);
@@ -179,8 +193,8 @@ void explainList()
     ls.push_back(2);    // {2}
     ls.emplace_back(4); //{2,4}
 
-    ls.push_front(5);   //{5,2,4}
-    ls.emplace_front(); //{2,4};
+    ls.push_front(5);    //{5,2,4}
+    ls.emplace_front(1); //{1,5,2,4}
 
     // rest functions same as vector
     // begin,end,rbegin,rend,clear,insert,size,swap
@@ -770,11 +784,10 @@ Searching, insertion, and deletion take average O(1) time, but worst case O(n) (
 Keys must be hashable (a hash function must exist).
 
 
-MAP VS UNORDERED_MAP IN NOTION 
+MAP VS UNORDERED_MAP IN NOTION
 LINK:
 https://www.notion.so/map-vs-unordered_map-1-24f251d6f0d480ada3e6c0ca2005b905?source=copy_link
 */
-
 
 /*
 1.set
@@ -865,7 +878,7 @@ sort() is a built-in function in C++ that sorts elements in a range. It takes th
 
 In the provided code snippet, we are sorting a vector of vectors (intervals) based on the first element of each inner vector. The lambda function [](vector<int> &a, vector<int> &b) { return a[0] < b[0]; } serves as the comparator, which compares the first elements of the inner vectors to determine their order in the sorted output.
 
-if you want to sort based on the second element and if the second element is the same then sort based on the first element in descending order, you can modify the comparator as follows:  
+if you want to sort based on the second element and if the second element is the same then sort based on the first element in descending order, you can modify the comparator as follows:
 sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b) {
     if (a[1] == b[1]) {
         return a[0] > b[0]; // Sort by first element in descending order if second elements are equal
